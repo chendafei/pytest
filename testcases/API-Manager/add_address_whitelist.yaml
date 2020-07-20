@@ -1,0 +1,21 @@
+tests:
+- case: 使用正确的数据创建链上白名单地址
+  request:
+    method: POST
+    url: /res/bank/api/withdraw/address?X-CSRF-TOKEN=QUY09JbE
+    headers:
+      User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+      Authorization: "535B2845C194402E8DA9CA3E0FDBD0A7"
+      Content-Type: "application/json;charset=UTF-8"
+    json:
+      coin_address: "15N29zFVLmNXiUs9xui6C9mvynDyy8kGKK"
+      coin_type: "BTC"
+      email_code_token: "2DA75443DD244113B408F1F82BCBAE84"
+      operate_token: "D8732C12AF4849C38F6D8F8766346804"
+      remark: "1111111"
+      smart_contract_name: "BTC"
+      transfer_method: "onchain"
+  expected:
+    status_code: 200
+    response:
+      code: 0

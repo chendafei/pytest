@@ -1,0 +1,17 @@
+tests:
+- case: 删除已存在的api密钥
+  request:
+    method: DELETE
+    url: /res/user/auth/api/306?X-CSRF-TOKEN=m0MQ3Wrt
+    headers:
+      User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+      Authorization: "535B2845C194402E8DA9CA3E0FDBD0A7"
+      Content-Type: "application/json;charset=UTF-8"
+    json:
+      totp_captcha:
+        validate_code: 111111
+        sequence: ""
+  expected:
+    status_code: 200
+    response:
+      code: 0

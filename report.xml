@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="3" hostname="shawn.local" name="pytest" skipped="2" tests="6" time="0.859" timestamp="2020-07-19T19:12:11.033534"><testcase classname="tests.test_add_api.TestInTheaters" file="tests/test_add_api.py" line="14" name="test_app_api[200]" time="0.000"><skipped message="暂时不需要用" type="pytest.skip">tests/test_add_api.py:15: 暂时不需要用</skipped></testcase><testcase classname="tests.test_add_api.TestInTheaters" file="tests/test_add_api.py" line="14" name="test_app_api[201]" time="0.000"><skipped message="暂时不需要用" type="pytest.skip">tests/test_add_api.py:15: 暂时不需要用</skipped></testcase><testcase classname="tests.test_add_api.TestInTheaters" file="tests/test_add_api.py" line="37" name="test_run[ä½¿ç¨æ­£ç¡®çæ°æ®æ°å¢apiå¯é¥]" time="0.187"><failure message="AssertionError: 期望字段在响应结果中不存在">self = &lt;test_add_api.TestInTheaters object at 0x7f92c0ee93d0&gt;, env = {&apos;hosts&apos;: {&apos;test2&apos;: &apos;http://test3.coinex.com&apos;}}, case = &apos;使用正确的数据新增api密钥&apos;
+http = {&apos;headers&apos;: {&apos;Authorization&apos;: &apos;535B2845C194402E8DA9CA3E0FDBD0A7&apos;, &apos;Content-Type&apos;: &apos;application/json;charset=UTF-8&apos;, &apos;U....149 Safari/537.36&apos;}, &apos;json&apos;: {&apos;allow_ips&apos;: &apos;&apos;, &apos;allow_trade&apos;: True, &apos;allow_withdraw&apos;: True, &apos;remark&apos;: &apos;flychen&apos;, ...}}
+expected = {&apos;response&apos;: {&apos;code&apos;: 0, &apos;data.allow_trade&apos;: True, &apos;data.allow_withdraw&apos;: True}, &apos;status_code&apos;: 200}
+
+    @pytest.mark.parametrize(&quot;case,http,expected&quot;, list_params, ids=cases)
+    def test_run(self, env, case, http, expected):
+        host = env[&apos;hosts&apos;][&apos;test2&apos;]
+        url = host+http.pop(&apos;url&apos;)
+        method = http.pop(&apos;method&apos;)
+        resp_obj = requests.request(method, url, **http)
+        assert resp_obj.status_code == expected[&apos;status_code&apos;]
+&gt;       asset_value(resp_obj, expected[&apos;response&apos;])
+
+tests/test_add_api.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+resp_obi = &lt;Response [200]&gt;, expected_json = {&apos;code&apos;: 0, &apos;data.allow_trade&apos;: True, &apos;data.allow_withdraw&apos;: True}
+
+    def asset_value(resp_obi, expected_json):
+        print(resp_obi)
+        results = []
+        if expected_json:
+            for key, expect_value in expected_json.items():
+                    results = jsonpath.jsonpath(resp_obi.json(), key)
+                    if results:
+                        assert results[0] == expect_value, &apos;期望值为{},实际返回的值为{}&apos;.format(expect_value, results)
+                    else:
+&gt;                       assert False,&apos;期望字段在响应结果中不存在&apos;
+E                       AssertionError: 期望字段在响应结果中不存在
+
+utils/commlib.py:76: AssertionError</failure></testcase><testcase classname="tests.test_add_api.TestInTheaters" file="tests/test_add_api.py" line="37" name="test_run[å¤æ³¨ä¸ºç©ºï¼æ°å¢APIå¯é¥]" time="0.133"><failure message="AssertionError: 期望字段在响应结果中不存在">self = &lt;test_add_api.TestInTheaters object at 0x7f92c0ef52b0&gt;, env = {&apos;hosts&apos;: {&apos;test2&apos;: &apos;http://test3.coinex.com&apos;}}, case = &apos;备注为空，新增API密钥&apos;
+http = {&apos;headers&apos;: {&apos;Authorization&apos;: &apos;535B2845C194402E8DA9CA3E0FDBD0A7&apos;, &apos;Content-Type&apos;: &apos;application/json;charset=UTF-8&apos;, &apos;U...0.3987.149 Safari/537.36&apos;}, &apos;json&apos;: {&apos;allow_ips&apos;: &apos;&apos;, &apos;allow_trade&apos;: True, &apos;allow_withdraw&apos;: False, &apos;remark&apos;: &apos;&apos;, ...}}
+expected = {&apos;response&apos;: {&apos;code&apos;: 0, &apos;data.remark&apos;: &apos;&apos;}, &apos;status_code&apos;: 200}
+
+    @pytest.mark.parametrize(&quot;case,http,expected&quot;, list_params, ids=cases)
+    def test_run(self, env, case, http, expected):
+        host = env[&apos;hosts&apos;][&apos;test2&apos;]
+        url = host+http.pop(&apos;url&apos;)
+        method = http.pop(&apos;method&apos;)
+        resp_obj = requests.request(method, url, **http)
+        assert resp_obj.status_code == expected[&apos;status_code&apos;]
+&gt;       asset_value(resp_obj, expected[&apos;response&apos;])
+
+tests/test_add_api.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+resp_obi = &lt;Response [200]&gt;, expected_json = {&apos;code&apos;: 0, &apos;data.remark&apos;: &apos;&apos;}
+
+    def asset_value(resp_obi, expected_json):
+        print(resp_obi)
+        results = []
+        if expected_json:
+            for key, expect_value in expected_json.items():
+                    results = jsonpath.jsonpath(resp_obi.json(), key)
+                    if results:
+                        assert results[0] == expect_value, &apos;期望值为{},实际返回的值为{}&apos;.format(expect_value, results)
+                    else:
+&gt;                       assert False,&apos;期望字段在响应结果中不存在&apos;
+E                       AssertionError: 期望字段在响应结果中不存在
+
+utils/commlib.py:76: AssertionError</failure></testcase><testcase classname="tests.test_add_api.TestInTheaters" file="tests/test_add_api.py" line="37" name="test_run[æ°å¢apiå¯é¥å«æIPå°å]" time="0.139"><failure message="AssertionError: 期望字段在响应结果中不存在">self = &lt;test_add_api.TestInTheaters object at 0x7f92c0f99160&gt;, env = {&apos;hosts&apos;: {&apos;test2&apos;: &apos;http://test3.coinex.com&apos;}}, case = &apos;新增api密钥含有IP地址&apos;
+http = {&apos;headers&apos;: {&apos;Authorization&apos;: &apos;535B2845C194402E8DA9CA3E0FDBD0A7&apos;, &apos;Content-Type&apos;: &apos;application/json;charset=UTF-8&apos;, &apos;U...i/537.36&apos;}, &apos;json&apos;: {&apos;allow_ips&apos;: &apos;10.15.1.5&apos;, &apos;allow_trade&apos;: False, &apos;allow_withdraw&apos;: True, &apos;remark&apos;: &apos;flychen&apos;, ...}}
+expected = {&apos;response&apos;: {&apos;code&apos;: 0, &apos;data.allow_ips&apos;: &apos;10.15.1.5&apos;}, &apos;status_code&apos;: 200}
+
+    @pytest.mark.parametrize(&quot;case,http,expected&quot;, list_params, ids=cases)
+    def test_run(self, env, case, http, expected):
+        host = env[&apos;hosts&apos;][&apos;test2&apos;]
+        url = host+http.pop(&apos;url&apos;)
+        method = http.pop(&apos;method&apos;)
+        resp_obj = requests.request(method, url, **http)
+        assert resp_obj.status_code == expected[&apos;status_code&apos;]
+&gt;       asset_value(resp_obj, expected[&apos;response&apos;])
+
+tests/test_add_api.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+resp_obi = &lt;Response [200]&gt;, expected_json = {&apos;code&apos;: 0, &apos;data.allow_ips&apos;: &apos;10.15.1.5&apos;}
+
+    def asset_value(resp_obi, expected_json):
+        print(resp_obi)
+        results = []
+        if expected_json:
+            for key, expect_value in expected_json.items():
+                    results = jsonpath.jsonpath(resp_obi.json(), key)
+                    if results:
+                        assert results[0] == expect_value, &apos;期望值为{},实际返回的值为{}&apos;.format(expect_value, results)
+                    else:
+&gt;                       assert False,&apos;期望字段在响应结果中不存在&apos;
+E                       AssertionError: 期望字段在响应结果中不存在
+
+utils/commlib.py:76: AssertionError</failure></testcase><testcase classname="tests.test_add_api.TestInTheaters" file="tests/test_add_api.py" line="37" name="test_run[æ°å¢apiå¯é¥IPå°åéæ³]" time="0.153"></testcase></testsuite></testsuites>
