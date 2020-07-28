@@ -29,7 +29,7 @@ tests:
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
     headers:
       User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-      Authorization: "535B2845C194402E8DA9CA3E0FDBD0A7"
+      Authorization: "FC4CFA528EB3CCD9AAD51178D3E5D410"
       Content-Type: "application/json;charset=UTF-8"
     json:
       remark: ""
@@ -51,7 +51,7 @@ tests:
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
     headers:
       User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-      Authorization: "535B2845C194402E8DA9CA3E0FDBD0A7"
+      Authorization: "FC4CFA528EB3CCD9AAD51178D3E5D410"
       Content-Type: "application/json;charset=UTF-8"
     json:
       remark: 'flychen'
@@ -73,7 +73,7 @@ tests:
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
     headers:
       User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-      Authorization: "535B2845C194402E8DA9CA3E0FDBD0A7"
+      Authorization: "FC4CFA528EB3CCD9AAD51178D3E5D410"
       Content-Type: "application/json;charset=UTF-8"
     json:
       remark: 'flychen'

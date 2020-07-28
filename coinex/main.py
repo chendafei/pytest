@@ -41,9 +41,9 @@ class RequestClient(object):
 
     def __init__(self, headers={}):
         #这里放测试用的秘钥
-        self.access_id = '424BBB7A8A194E7FA308CD15AE5D99EB'      # replace
-        self.secret_key = '728DD14A28904987831D78BFB948AA7F0CD9BCA81F42878D'     # replace
-        self.url = 'http://testapi3.coinex.com'
+        self.access_id = '094E2B58B5E54EF7917B6D810725C18F'      # replace
+        self.secret_key = '783827651F2F6CA60989515EABA5F8886B414D009062967C'     # replace
+        self.url = 'http://testapi2.coinex.com'
         self.headers = self.__headers
         self.headers.update(headers)
 
@@ -162,5 +162,17 @@ def test_onchainwithdraw():
     assert response.status == 200
     assert result['message'] == 'Ok'
 
+
+def test_search():
+    request_client = RequestClient()
+
+    response = request_client.request(
+        'POST',
+        '{url}/v1/balance/info'.format(url=request_client.url),
+    )
+    result = complex_json.loads(response.data)
+    print(complex_json.loads(response.data))
+    assert response.status == 200
+    assert result['code'] == 0
 #
 # if __name__ =="__main__":
