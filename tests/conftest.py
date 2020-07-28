@@ -8,6 +8,7 @@ sys.path.append(os.getcwd())
 from utils.commlib import get_all_test_datas_extract
 from tests.test_add_api import TestInTheaters
 import json
+import logging
 
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
@@ -27,12 +28,14 @@ def env(request):
     return env_config
 
 
-@pytest.fixture(scope="function", params=get_all_test_datas_extract("E://code/pytest/testcases/API-Manager/delete_api.yaml"))
+@pytest.fixture(scope="function", params=get_all_test_datas_extract("/Users/mac/PycharmProjects/pytest/testcases/API-Manager/delete_api.yaml"))
 def gentrates_test_data(request):
     list_params = request.param
     if TestInTheaters.output:
         data = json.dumps(list_params)
         for key, value in TestInTheaters.output.items():
+            print(key)
+            print(value)
             list_params = data.replace(f'${key}', str(value))
         list_params = json.loads(list_params)
     return list_params

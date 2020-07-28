@@ -5,7 +5,7 @@ tests:
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
     headers:
       User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-      Authorization: "F7120A57A2224017BE3F503C41DA5D07"
+      Authorization: "3B87183A0A2D4991813B2128F9E2F27D"
       Content-Type: "application/json;charset=UTF-8"
     json:
       remark: 'flychen'
@@ -30,7 +30,7 @@ tests:
     url: /res/user/auth/api/$user_auth_id?X-CSRF-TOKEN=m0MQ3Wrt
     headers:
       User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-      Authorization: "F7120A57A2224017BE3F503C41DA5D07"
+      Authorization: "3B87183A0A2D4991813B2128F9E2F27D"
       Content-Type: "application/json;charset=UTF-8"
     json:
       totp_captcha:

@@ -7,6 +7,7 @@ import yamlpy
 from utils.commlib import diff_response, asset_value, get_all_test_datas,get_all_test_datas_extract,get_test_data
 import allure
 import jsonpath
+import logging
 
 @allure.feature('API密钥功能')
 class TestInTheaters(object):
@@ -33,7 +34,7 @@ class TestInTheaters(object):
 
     # cases, parameters = get_all_test_datas("E://code/pytest/testcases")
     # list_params = list(parameters)
-    cases, parameters = get_test_data("E://code/pytest/testcases/API-Manager/add_api.yaml")
+    cases, parameters = get_test_data("/Users/mac/PycharmProjects/pytest/testcases/API-Manager/delete_api.yaml")
     list_params = list(parameters)
 
     # 完整的单接口测试框架
@@ -47,9 +48,6 @@ class TestInTheaters(object):
         assert resp_obj.status_code == expected['status_code']
         asset_value(resp_obj, expected['response'])
 
-    cases, parameters = get_all_test_datas_extract("E://code/pytest/testcases/API-Manager/delete_api.yaml")
-    list_params = list(parameters)
-
     # 多接口测试框架
     # @pytest.mark.parametrize("case,http,expected,extract", get_data, ids=cases)
     def test_run(self, env, gentrates_test_data):
@@ -59,7 +57,8 @@ class TestInTheaters(object):
         resp_obj = requests.request(method, url, **gentrates_test_data[1])
         if gentrates_test_data[3]:
             for key, value in gentrates_test_data[3].items():
-                TestInTheaters.output[key] = jsonpath.jsonpath(resp_obj.json(), value)
+                TestInTheaters.output[key] = jsonpath.jsonpath(resp_obj.json(), value)[0]
+            print(TestInTheaters.output)
         assert resp_obj.status_code == gentrates_test_data[2]['status_code']
         asset_value(resp_obj, gentrates_test_data[2]['response'])
 
