@@ -5,7 +5,7 @@ tests:
     url: /res/bank/api/withdraw/address?X-CSRF-TOKEN=QUY09JbE
     headers:
       User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-      Authorization: "535B2845C194402E8DA9CA3E0FDBD0A7"
+      Authorization: $token
       Content-Type: "application/json;charset=UTF-8"
     json:
       coin_address: "15N29zFVLmNXiUs9xui6C9mvynDyy8kGKK"
