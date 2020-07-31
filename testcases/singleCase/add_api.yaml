@@ -1,5 +1,6 @@
 tests:
 - case: 使用正确的数据新增api密钥
+  run: yes
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
@@ -24,6 +25,7 @@ tests:
 
 
 - case: 备注为空，新增API密钥
+  run: yes
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
@@ -46,6 +48,7 @@ tests:
       code: 0
 
 - case: 新增api密钥含有IP地址
+  run: yes
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
@@ -68,6 +71,7 @@ tests:
       code: 0
 
 - case: 新增api密钥IP地址非法
+  run: yes
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX

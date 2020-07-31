@@ -1,5 +1,6 @@
 tests:
 - case: 使用正确的数据编辑api
+  run: yes
   request:
     method: PUT
     url: /res/user/auth/api/$user_auth_id?X-CSRF-TOKEN=rzrhoG0F
@@ -19,3 +20,5 @@ tests:
     status_code: 200
     response:
       code: 0
+      allow_trade: true
+      allow_withdraw: false

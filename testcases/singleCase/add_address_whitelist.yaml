@@ -1,5 +1,6 @@
 tests:
 - case: 使用正确的数据创建链上白名单地址
+  run: no
   request:
     method: POST
     url: /res/bank/api/withdraw/address?X-CSRF-TOKEN=QUY09JbE

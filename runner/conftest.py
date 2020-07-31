@@ -5,12 +5,12 @@ import pytest
 from py._xmlgen import html
 import os, sys
 sys.path.append(os.getcwd())
-from utils.commlib import get_all_test_datas_extract,get_test_data,asset_value
 from runner.test_run import TestInTheaters
 import json
 import requests
 import jsonpath
 import random
+from utils.getData.get_all_test_datas_extract
 
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
@@ -52,17 +52,19 @@ def get_token():
     r = requests.post(
         url='http://test2.coinex.com/res/user/sign/in/verify?X-CSRF-TOKEN=V_1VKTkN ',
         json=dict1)
+    assert r.status_code == 200
+    assert r.json().data['code'] == 0
     return r.json()['data']['token']
 
 
-@pytest.fixture(scope="function", params=get_all_test_datas_extract("E://code/pytest/testcases/combinCase"))
+@pytest.fixture(scope="function", params=get_all_test_datas_extract("/Users/mac/PycharmProjects/pytest/testcases"))
 def gentrates_test_data(request):
     list_params = request.param
     if TestInTheaters.output:
         print(TestInTheaters.output)
-        data = json.dumps(list_params)
+        list_params = json.dumps(list_params)
         for key, value in TestInTheaters.output.items():
-            list_params = data.replace(f'${key}', str(value))
+            list_params = list_params.replace(f'${key}', str(value))
         list_params = json.loads(list_params)
         print(list_params)
     return list_params
