@@ -5,8 +5,8 @@ import requests
 import yamlpy
 import jsonpath
 import allure
-from utils.assertValue.Tools
-from utils.getData.get_all_test_datas
+from utils.assetValue import Tools
+from utils.getData import get_all_test_datas
 
 
 @allure.feature('API密钥功能')

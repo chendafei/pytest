@@ -1,6 +1,32 @@
 tests:
+- case: 使用正确的数据新增api密钥
+  run: "yes"
+  request:
+    method: POST
+    url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
+    headers:
+      User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+      Authorization: $token
+      Content-Type: "application/json;charset=UTF-8"
+    json:
+      remark: 'flychen'
+      allow_ips: ''
+      allow_trade: true
+      allow_withdraw: true
+      totp_captcha:
+        validate_code: 111111
+        sequence: ""
+  extract:
+    user_auth_id: data.user_auth_id
+  expected:
+    status_code: 200
+    response:
+      data.allow_trade: true
+      data.allow_withdraw: true
+      code: 0
+
 - case: 使用正确的数据编辑api
-  run: yes
+  run: "yes"
   request:
     method: PUT
     url: /res/user/auth/api/$user_auth_id?X-CSRF-TOKEN=rzrhoG0F
@@ -20,5 +46,5 @@ tests:
     status_code: 200
     response:
       code: 0
-      allow_trade: true
-      allow_withdraw: false
+      data.allow_trade: true
+      data.allow_withdraw: true

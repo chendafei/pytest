@@ -1,8 +1,3 @@
-import yaml
-import json
-import jsonpath
-import os
-import pytest
 import requests
 import jsonpath
 import os, sys
@@ -65,9 +60,9 @@ class Tools():
         print(resp_obi)
         if expected_json:
             for key, expect_value in expected_json.items():
-                results = jsonpath.jsonpath(resp_obi.json(), key)[0]
+                results = jsonpath.jsonpath(resp_obi.json(), key)
                 if results:
-                    assert results == expect_value, '期望值为{},实际返回的值为{}'.format(expect_value, results)
+                    assert results[0] == expect_value, '期望值为{},实际返回的值为{}'.format(expect_value, results)
                 else:
                     assert False, '期望字段在响应结果中不存在'
 

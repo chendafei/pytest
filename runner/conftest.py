@@ -10,7 +10,8 @@ import json
 import requests
 import jsonpath
 import random
-from utils.getData.get_all_test_datas_extract
+from utils.getData import get_all_test_datas_extract
+
 
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
@@ -33,7 +34,7 @@ def env(request):
 def before_login():
     before = requests.post(
         url="http://test2.coinex.com/res/user/sign/in?X-CSRF-TOKEN=vrCF7aT8",
-        json={"account": "flychen1111+test002@gmail.com", "login_password": "123456"}
+        json={"account": "flychen1111+test003@gmail.com", "login_password": "123456"}
     )
     operate_token = before.json()['data']['operate_token']
     sign_in_log_id = before.json()['data']['sign_in_log_id']
@@ -46,18 +47,18 @@ def get_token():
     code = random.randrange(11111, 99999)
     dict1 = {"operate_token": operate_token,
              "sign_in_log_id": sign_in_log_id,
-             "account": "flychen1111+test002@gmail.com",
+             "account": "flychen1111+test003@gmail.com",
              "login_password": "123456",
              "totp_captcha": {"validate_code": code, "sequence": ""}}
     r = requests.post(
         url='http://test2.coinex.com/res/user/sign/in/verify?X-CSRF-TOKEN=V_1VKTkN ',
         json=dict1)
     assert r.status_code == 200
-    assert r.json().data['code'] == 0
+    assert r.json()['code'] == 0
     return r.json()['data']['token']
 
 
-@pytest.fixture(scope="function", params=get_all_test_datas_extract("/Users/mac/PycharmProjects/pytest/testcases"))
+@pytest.fixture(scope="function", params=get_all_test_datas_extract("/Users/mac/PycharmProjects/pytest/testcases/"))
 def gentrates_test_data(request):
     list_params = request.param
     if TestInTheaters.output:

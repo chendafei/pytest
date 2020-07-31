@@ -1,5 +1,6 @@
 tests:
 - case: 使用正确的数据新增api密钥
+  run: "yes"
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
@@ -25,6 +26,7 @@ tests:
       code: 0
 
 - case: 删除已存在的api密钥
+  run: "yes"
   request:
     method: DELETE
     url: /res/user/auth/api/$user_auth_id?X-CSRF-TOKEN=m0MQ3Wrt

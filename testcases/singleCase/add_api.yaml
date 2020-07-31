@@ -1,12 +1,12 @@
 tests:
 - case: 使用正确的数据新增api密钥
-  run: yes
+  run: "yes"
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
     headers:
       User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-      Authorization: &token
+      Authorization: $token
       Content-Type: "application/json;charset=UTF-8"
     json:
       remark: 'flychen'
@@ -25,7 +25,7 @@ tests:
 
 
 - case: 备注为空，新增API密钥
-  run: yes
+  run: "yes"
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
@@ -48,7 +48,7 @@ tests:
       code: 0
 
 - case: 新增api密钥含有IP地址
-  run: yes
+  run: "yes"
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
@@ -71,7 +71,7 @@ tests:
       code: 0
 
 - case: 新增api密钥IP地址非法
-  run: yes
+  run: "yes"
   request:
     method: POST
     url: /res/user/auth/api?X-CSRF-TOKEN=dvZL3veX
@@ -88,8 +88,9 @@ tests:
         validate_code: 111111
         sequence: ""
   expected:
-    status_code: 400
+    status_code: 200
     response:
+      code: 10000
 
 
 

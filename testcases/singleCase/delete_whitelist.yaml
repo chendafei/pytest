@@ -1,6 +1,6 @@
 tests:
 - case: 删除已存在的地址白名单
-  run: no
+  run: "no"
   request:
     method: DELETE
     url: /res/bank/api/withdraw/address/57?X-CSRF-TOKEN=khGRo44k
