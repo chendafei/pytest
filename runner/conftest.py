@@ -41,7 +41,7 @@ def before_login():
 
 
 @pytest.fixture(scope="session")
-def get_token(request):
+def get_token():
     operate_token, sign_in_log_id = before_login()
     code = random.randrange(11111, 99999)
     dict1 = {"operate_token": operate_token,
@@ -64,6 +64,7 @@ def gentrates_test_data(request):
         for key, value in TestInTheaters.output.items():
             list_params = data.replace(f'${key}', str(value))
         list_params = json.loads(list_params)
+        print(list_params)
     return list_params
 
 

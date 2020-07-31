@@ -10,15 +10,15 @@ import jsonpath
 
 @allure.feature('API密钥功能')
 class TestInTheaters(object):
-    output ={}
-
-    cases, parameters = get_all_test_datas("E://code/pytest/testcases/singleCase")
-    list_params = list(parameters)
+    output = {}
 
     def test_login(self, get_token):
         TestInTheaters.output['token'] = get_token
 
+    cases, parameters = get_all_test_datas("E://code/pytest/testcases/singleCase")
+    list_params = list(parameters)
     # 完整的单接口测试框架
+    @pytest.mark.skip(reason='暂不需要')
     @pytest.mark.parametrize("case,http,expected", list_params, ids=cases)
     def test_run_single(self, env, case, http, expected):
         host = env['hosts']['test2']
@@ -37,7 +37,7 @@ class TestInTheaters(object):
         resp_obj = requests.request(method, url, **gentrates_test_data[1])
         if gentrates_test_data[3]:
             for key, value in gentrates_test_data[3].items():
-                TestInTheaters.output[key] = jsonpath.jsonpath(resp_obj.json(), value)
+                TestInTheaters.output[key] = jsonpath.jsonpath(resp_obj.json(), value)[0]
         assert resp_obj.status_code == gentrates_test_data[2]['status_code']
         asset_value(resp_obj, gentrates_test_data[2]['response'])
 
