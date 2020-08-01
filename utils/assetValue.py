@@ -2,10 +2,12 @@ import requests
 import jsonpath
 import os, sys
 sys.path.append(os.getcwd())
+import json
 import random
 
 
 class Tools():
+    output = {}   # 全局变量，用于存储接口的返回值
     '''
         下面的函数是响应结果和期望值比对的函数
        '''
@@ -66,6 +68,16 @@ class Tools():
                 else:
                     assert False, '期望字段在响应结果中不存在'
 
+    # 该函数用于用例在执行时实时更新用例
+    def update_parameter(self, parameter):
+        if Tools.output:
+            list_params = json.dumps(parameter)
+            for key, value in Tools.output.items():
+                list_params = list_params.replace(f'${key}', str(value))
+            list_params = json.loads(list_params)
+        return list_params
+
+
 
 
 
@@ -91,34 +103,18 @@ if __name__ == '__main__':
     # print(s1[0][1].pop('method'))
     # print(s1)
     #
-    # s = {}
-    # if s:
-    #     print('非空')
-    # else:
-    #     print('空')
-    before = requests.post(
-        url= "http://test2.coinex.com/res/user/sign/in?X-CSRF-TOKEN=vrCF7aT8",
-        json= {"account":"flychen1111+test002@gmail.com","login_password":"123456"}
-    )
-    print(before.json())
-    operate_token = before.json()['data']['operate_token']
-    sign_in_log_id = before.json()['data']['sign_in_log_id']
+    s = {}
+    if s:
+        print('非空')
+    else:
+        print('空')
+    try:
+        print('hello')
+    except KeyError:
+        print('hello')
 
 
 
-    output = {}
-    code = random.randrange(11111, 99999)
-    dict1 = {"operate_token": operate_token,
-             "sign_in_log_id": sign_in_log_id,
-             "account": "flychen1111+test002@gmail.com",
-             "login_password": "123456",
-             "totp_captcha": {"validate_code": code, "sequence": ""}}
-    r = requests.post(
-        url='http://test2.coinex.com/res/user/sign/in/verify?X-CSRF-TOKEN=V_1VKTkN ',
-        json=dict1)
-    print(r.json())
-    output['token'] = r.json()['data']['token']
-    print(output)
 
 
 

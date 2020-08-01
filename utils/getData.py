@@ -1,6 +1,7 @@
 import yaml
 import os, sys
 sys.path.append(os.getcwd())
+import json
 
 
 # 获取单个yaml文件测试用例的接口
@@ -55,7 +56,6 @@ def get_all_test_datas(test_data_path):
 # 获取confest传递参数的接口测试数据
 def get_all_test_datas_extract(test_data_path):
     file_path = get_all_files(test_data_path)
-    print(file_path)
     case = []  # 存储测试用例名称
     http = []  # 存储请求对象
     expected = []  # 存储预期结果
@@ -64,7 +64,6 @@ def get_all_test_datas_extract(test_data_path):
         with open(file, encoding='utf-8') as f:
             dat = yaml.load(f.read(), Loader=yaml.SafeLoader)
             test = dat['tests']
-            print(test)
             for td in test:
                 if td.get('run') == 'yes':  # run 为yes才执行，否则不用执行
                     case.append(td.get('case', ''))
@@ -73,6 +72,5 @@ def get_all_test_datas_extract(test_data_path):
                     extract.append(td.get('extract', {}))
     parameters = zip(case, http, expected, extract)
     parameters = list(parameters)
-    print(parameters)
     return parameters
 

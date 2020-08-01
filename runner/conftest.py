@@ -34,10 +34,13 @@ def env(request):
 def before_login():
     before = requests.post(
         url="http://test2.coinex.com/res/user/sign/in?X-CSRF-TOKEN=vrCF7aT8",
-        json={"account": "flychen1111+test003@gmail.com", "login_password": "123456"}
+        json={"account": "flychen1111+test001@gmail.com", "login_password": "123456"}
     )
-    operate_token = before.json()['data']['operate_token']
-    sign_in_log_id = before.json()['data']['sign_in_log_id']
+    try:
+        operate_token = before.json()['data']['operate_token']
+        sign_in_log_id = before.json()['data']['sign_in_log_id']
+    except KeyError:
+        print('登录接口报错！接口值获取不到')
     return operate_token, sign_in_log_id
 
 
@@ -47,32 +50,38 @@ def get_token():
     code = random.randrange(11111, 99999)
     dict1 = {"operate_token": operate_token,
              "sign_in_log_id": sign_in_log_id,
-             "account": "flychen1111+test003@gmail.com",
+             "account": "flychen1111+test001@gmail.com",
              "login_password": "123456",
              "totp_captcha": {"validate_code": code, "sequence": ""}}
     r = requests.post(
         url='http://test2.coinex.com/res/user/sign/in/verify?X-CSRF-TOKEN=V_1VKTkN ',
         json=dict1)
-    assert r.status_code == 200
-    assert r.json()['code'] == 0
-    return r.json()['data']['token']
+    try:
+        assert r.status_code == 200
+        assert r.json()['code'] == 0
+        return r.json()['data']['token']
+    except KeyError:
+        print('登录接口报错了，后面的用例不用执行了')
 
 
 @pytest.fixture(scope="function", params=get_all_test_datas_extract("/Users/mac/PycharmProjects/pytest/testcases/"))
 def gentrates_test_data(request):
-    list_params = request.param
+    list_params, case = request.param
     if TestInTheaters.output:
         print(TestInTheaters.output)
         list_params = json.dumps(list_params)
         for key, value in TestInTheaters.output.items():
             list_params = list_params.replace(f'${key}', str(value))
         list_params = json.loads(list_params)
-        print(list_params)
     return list_params
 
 
+def pytest_generate_tests(metafunc):
+    ids = []
+    test_data = get_all_test_datas_extract("/Users/mac/PycharmProjects/pytest/testcases")
+    if "parameters" in metafunc.fixturenames:
+        for data in test_data:  # 用test_data中的id作为测试用例名称
+            ids.append(data[0])
 
-
-
-
+        metafunc.parametrize("parameters", test_data, ids=ids, scope="function")  # 用test_data这个列表对parameters进行参数化。
 
