@@ -1,0 +1,32 @@
+tests:
+- case: 修改正确的昵称
+  run: "yes"
+  request:
+    method: POST
+    url: /res/user/?X-CSRF-TOKEN=f0zst-Yv
+    headers:
+      User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+      Authorization: $token
+      Content-Type: "application/json;charset=UTF-8"
+    json:
+      name: 'flychen11'
+  expected:
+    status_code: 200
+    response:
+      code: 0
+
+- case: 修改昵称为已存在的昵称
+  run: "yes"
+  request:
+    method: POST
+    url: /res/user/?X-CSRF-TOKEN=f0zst-Yv
+    headers:
+      User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+      Authorization: $token
+      Content-Type: "application/json;charset=UTF-8"
+    json:
+      name: 'fl'
+  expected:
+    status_code: 200
+    response:
+      code: 0

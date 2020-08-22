@@ -1,0 +1,59 @@
+tests:
+- case: 使用正确的数据新增子账号
+  run: "yes"
+  request:
+    method: POST
+    url: /res/sub_accounts/register?X-CSRF-TOKEN=1xPoghKr
+    headers:
+      User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+      Authorization: $token
+      Content-Type: "application/json;charset=UTF-8"
+    json:
+      user_name: 'flychenchen6134678'
+      password: '123456'
+      password_level: "low"
+      totp_captcha:
+        validate_code: '111111'
+        sequence: ''
+  expected:
+    status_code: 200
+    response:
+      code: 0
+  extract:
+    user_id: data.user_id
+
+- case: 获取子账号
+  run: "yes"
+  request:
+    method: GET
+    url: /res/sub_accounts/?limit=20&page=1
+    headers:
+      User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+      Authorization: $token
+  expected:
+    status_code: 200
+    response:
+      code: 0
+      data.data[0].user_id: $user_id
+
+- case: 删除子账号
+  run: "yes"
+  request:
+    method: POST
+    url: /res/sub_accounts/$user_id?X-CSRF-TOKEN=qjRML2k9
+    headers:
+      User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+      Authorization: $token
+      Content-Type: "application/json;charset=UTF-8"
+    json:
+      totp_captcha:
+        validate_code: '111117'
+        sequence: ''
+  expected:
+    status_code: 200
+    response:
+      code: 0
+
+
+
+

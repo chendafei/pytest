@@ -1,0 +1,21 @@
+[2020-08-22 15:53:32] [DEBUG] test
+[2020-08-22 16:01:29] [DEBUG] Starting new HTTP connection (1): test2.coinex.com:80
+[2020-08-22 16:01:29] [DEBUG] http://test2.coinex.com:80 "POST /res/user/sign/in?X-CSRF-TOKEN=vrCF7aT8 HTTP/1.1" 200 255
+[2020-08-22 16:01:29] [DEBUG] Starting new HTTP connection (1): test2.coinex.com:80
+[2020-08-22 16:01:29] [DEBUG] http://test2.coinex.com:80 "POST /res/user/sign/in/verify?X-CSRF-TOKEN=V_1VKTkN%20 HTTP/1.1" 200 65
+[2020-08-22 16:04:25] [DEBUG] Starting new HTTP connection (1): test2.coinex.com:80
+[2020-08-22 16:04:25] [DEBUG] http://test2.coinex.com:80 "POST /res/user/sign/in?X-CSRF-TOKEN=vrCF7aT8 HTTP/1.1" 200 58
+[2020-08-22 16:11:20] [DEBUG] hi 
+[2020-08-22 16:12:40] [DEBUG] Starting new HTTP connection (1): test2.coinex.com:80
+[2020-08-22 16:12:40] [DEBUG] http://test2.coinex.com:80 "POST /res/user/sign/in?X-CSRF-TOKEN=vrCF7aT8 HTTP/1.1" 200 58
+[2020-08-22 16:12:41] [DEBUG] 开始执行测试用例
+[2020-08-22 16:12:41] [DEBUG] 开始执行测试用例
+[2020-08-22 16:12:41] [DEBUG] 开始执行测试用例
+[2020-08-22 16:17:14] [DEBUG] Starting new HTTP connection (1): test2.coinex.com:80
+[2020-08-22 16:17:14] [DEBUG] http://test2.coinex.com:80 "POST /res/user/sign/in?X-CSRF-TOKEN=vrCF7aT8 HTTP/1.1" 200 58
+[2020-08-22 16:17:14] [DEBUG] 开始执行测试用例
+[2020-08-22 16:17:14] [DEBUG] 执行的参数为:('使用正确的数据新增子账号', {'method': 'POST', 'url': '/res/sub_accounts/register?X-CSRF-TOKEN=1xPoghKr', 'headers': {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36', 'Authorization': '$token', 'Content-Type': 'application/json;charset=UTF-8'}, 'json': {'user_name': 'flychenchen6134678', 'password': '123456', 'password_level': 'low', 'totp_captcha': {'validate_code': '111111', 'sequence': ''}}}, {'status_code': 200, 'response': {'code': 0}}, {'user_id': 'data.user_id'})
+[2020-08-22 16:17:14] [DEBUG] 开始执行测试用例
+[2020-08-22 16:17:14] [DEBUG] 执行的参数为:('获取子账号', {'method': 'GET', 'url': '/res/sub_accounts/?limit=20&page=1', 'headers': {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36', 'Authorization': '$token'}}, {'status_code': 200, 'response': {'code': 0, 'data.data[0].user_id': '$user_id'}}, {})
+[2020-08-22 16:17:14] [DEBUG] 开始执行测试用例
+[2020-08-22 16:17:14] [DEBUG] 执行的参数为:('删除子账号', {'method': 'POST', 'url': '/res/sub_accounts/$user_id?X-CSRF-TOKEN=qjRML2k9', 'headers': {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36', 'Authorization': '$token', 'Content-Type': 'application/json;charset=UTF-8'}, 'json': {'totp_captcha': {'validate_code': '111117', 'sequence': ''}}}, {'status_code': 200, 'response': {'code': 0}}, {})
